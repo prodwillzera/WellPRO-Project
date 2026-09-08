@@ -2,8 +2,9 @@
 
 ## Integrantes
 
-- Aluno 1
-- Aluno 2
+- Tomás Müller de Carvalho
+- Wellington Felipe Ribeiro
+- William Lopes Batista
 
 ## Descrição
 
