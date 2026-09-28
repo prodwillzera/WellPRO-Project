@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Registrar devolução · WellPro</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <!-- Menu estático. Nesta etapa, edite o mesmo trecho nas demais páginas. -->
+  <aside class="menu">
+    <a class="marca" href="painel.html" aria-label="WellPro — Visão geral">WellPro<span>.</span></a>
+    <nav aria-label="Menu principal">
+        <a href="painel.html">Visão geral</a>
+        <a href="chaves.html">Chaves</a>
+        <a href="retirada.html">Registrar retirada</a>
+        <a href="devolucao.html" class="ativo" aria-current="page">Registrar devolução</a>
+        <a href="historico.html">Histórico</a>
+        <a href="organizacao.html">Organização</a>
+    </nav>
+    <div class="instituicao">
+      <!-- Espaço reservado para a imagem oficial do campus. -->
+      <strong>Sua organização</strong>
+      <small>Gestão de ambientes</small>
+      <a href="index.html">Voltar ao acesso</a>
+    </div>
+  </aside>
+  <main class="conteudo">
+    <header class="cabecalho">
+      <div><h1>Registrar devolução</h1><p class="descricao">Modelo de conferência para receber uma chave.</p></div>
+      
+    </header>
+    <p class="aviso">Protótipo estático · Dados fictícios para visualizar as telas. Nenhuma informação é salva.</p>
+    <section class="painel"><h2>Chave em uso</h2>    <div class="tabela">
+      <table>
+        <thead><tr><th>Chave / ambiente</th><th>Localização</th><th>Situação</th><th>Responsável</th><th>Ação</th></tr></thead>
+        <tbody>
+          <tr><td data-label="Chave"><strong>CH-02 · Laboratório 01</strong><small>Laboratório</small></td><td data-label="Localização">Bloco B</td><td data-label="Situação"><span class="status retirada">Retirada</span></td><td data-label="Responsável">Marina Souza</td><td><a class="link" href="devolucao.html">Ver formulário de devolução</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+    </section>
+    <section class="painel">
+      <form>
+        <label>Chave<select name="chave"><option>CH-02 · Laboratório 01</option></select></label>
+        <p>Responsável do exemplo: <strong>Marina Souza</strong></p>
+        <label>Observação<textarea name="observacao" rows="3" placeholder="Informação sobre a devolução"></textarea></label>
+        <div class="acoes"><button type="button" disabled>Confirmar devolução</button><a class="link" href="painel.html">Voltar à visão geral</a></div>
+      </form>
+    </section>
+    <footer>WellPro · Sistema de controle de chaves · Etapa 01</footer>
+  </main>
+</body>
+</html>

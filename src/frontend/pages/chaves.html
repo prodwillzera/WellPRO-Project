@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chaves · WellPro</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <!-- Menu estático. Nesta etapa, edite o mesmo trecho nas demais páginas. -->
+  <aside class="menu">
+    <a class="marca" href="painel.html" aria-label="WellPro — Visão geral">WellPro<span>.</span></a>
+    <nav aria-label="Menu principal">
+        <a href="painel.html">Visão geral</a>
+        <a href="chaves.html" class="ativo" aria-current="page">Chaves</a>
+        <a href="retirada.html">Registrar retirada</a>
+        <a href="devolucao.html">Registrar devolução</a>
+        <a href="historico.html">Histórico</a>
+        <a href="organizacao.html">Organização</a>
+    </nav>
+    <div class="instituicao">
+      <!-- Espaço reservado para a imagem oficial do campus. -->
+      <strong>Sua organização</strong>
+      <small>Gestão de ambientes</small>
+      <a href="index.html">Voltar ao acesso</a>
+    </div>
+  </aside>
+  <main class="conteudo">
+    <header class="cabecalho">
+      <div><h1>Chaves</h1><p class="descricao">Consulte o modelo de inventário.</p></div>
+      <a class="botao" href="cadastro.html">+ Nova chave</a>
+    </header>
+    <p class="aviso">Protótipo estático · Dados fictícios para visualizar as telas. Nenhuma informação é salva.</p>
+    <section class="painel">
+      <div class="filtros"><label>Buscar chave<input type="search" placeholder="Nome ou localização" disabled></label><label>Situação<select disabled><option>Todas</option><option>Disponível</option><option>Retirada</option><option>Perdida</option></select></label></div>
+      <p class="descricao">Busca e filtros serão implementados na etapa JavaScript.</p>
+    <div class="tabela">
+      <table>
+        <thead><tr><th>Chave / ambiente</th><th>Localização</th><th>Situação</th><th>Responsável</th><th>Ação</th></tr></thead>
+        <tbody>
+          <tr><td data-label="Chave"><strong>CH-01 · Sala 101</strong><small>Sala</small></td><td data-label="Localização">Bloco A</td><td data-label="Situação"><span class="status disponivel">Disponível</span></td><td data-label="Responsável">—</td><td><a class="link" href="retirada.html">Ver formulário de retirada</a></td></tr>
+          <tr><td data-label="Chave"><strong>CH-02 · Laboratório 01</strong><small>Laboratório</small></td><td data-label="Localização">Bloco B</td><td data-label="Situação"><span class="status retirada">Retirada</span></td><td data-label="Responsável">Marina Souza</td><td><a class="link" href="devolucao.html">Ver formulário de devolução</a></td></tr>
+          <tr><td data-label="Chave"><strong>CH-03 · Armário 02</strong><small>Armário</small></td><td data-label="Localização">Recepção</td><td data-label="Situação"><span class="status perdida">Perdida</span></td><td data-label="Responsável">—</td><td>—</td></tr>
+          <tr><td data-label="Chave"><strong>CH-04 · Sala de reuniões</strong><small>Sala</small></td><td data-label="Localização">Bloco A</td><td data-label="Situação"><span class="status disponivel">Disponível</span></td><td data-label="Responsável">—</td><td><a class="link" href="retirada.html">Ver formulário de retirada</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+    </section>
+    <footer>WellPro · Sistema de controle de chaves · Etapa 01</footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Registrar retirada · WellPro</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <!-- Menu estático. Nesta etapa, edite o mesmo trecho nas demais páginas. -->
+  <aside class="menu">
+    <a class="marca" href="painel.html" aria-label="WellPro — Visão geral">WellPro<span>.</span></a>
+    <nav aria-label="Menu principal">
+        <a href="painel.html">Visão geral</a>
+        <a href="chaves.html">Chaves</a>
+        <a href="retirada.html" class="ativo" aria-current="page">Registrar retirada</a>
+        <a href="devolucao.html">Registrar devolução</a>
+        <a href="historico.html">Histórico</a>
+        <a href="organizacao.html">Organização</a>
+    </nav>
+    <div class="instituicao">
+      <!-- Espaço reservado para a imagem oficial do campus. -->
+      <strong>Sua organização</strong>
+      <small>Gestão de ambientes</small>
+      <a href="index.html">Voltar ao acesso</a>
+    </div>
+  </aside>
+  <main class="conteudo">
+    <header class="cabecalho">
+      <div><h1>Registrar retirada</h1><p class="descricao">Estrutura do formulário de entrega de uma chave.</p></div>
+      
+    </header>
+    <p class="aviso">Protótipo estático · Dados fictícios para visualizar as telas. Nenhuma informação é salva.</p>
+    <section class="painel">
+      <form>
+        <label>Chave disponível<select name="chave"><option>CH-01 · Sala 101</option><option>CH-04 · Sala de reuniões</option></select></label>
+        <label>Nome do responsável<input type="text" name="responsavel" placeholder="Nome completo"></label>
+        <label>Matrícula ou identificação<input type="text" name="identificacao" placeholder="Identificação na organização"></label>
+        <label>Observação<textarea name="observacao" rows="3" placeholder="Informação adicional, se necessário"></textarea></label>
+        <p class="descricao">O registro de data e hora e a mudança de situação serão implementados posteriormente.</p>
+        <div class="acoes"><button type="button" disabled>Confirmar retirada</button><a class="link" href="chaves.html">Voltar às chaves</a></div>
+      </form>
+    </section>
+    <footer>WellPro · Sistema de controle de chaves · Etapa 01</footer>
+  </main>
+</body>
+</html>

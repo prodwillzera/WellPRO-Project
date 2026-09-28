@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nova chave · WellPro</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <!-- Menu estático. Nesta etapa, edite o mesmo trecho nas demais páginas. -->
+  <aside class="menu">
+    <a class="marca" href="painel.html" aria-label="WellPro — Visão geral">WellPro<span>.</span></a>
+    <nav aria-label="Menu principal">
+        <a href="painel.html">Visão geral</a>
+        <a href="chaves.html" class="ativo" aria-current="page">Chaves</a>
+        <a href="retirada.html">Registrar retirada</a>
+        <a href="devolucao.html">Registrar devolução</a>
+        <a href="historico.html">Histórico</a>
+        <a href="organizacao.html">Organização</a>
+    </nav>
+    <div class="instituicao">
+      <!-- Espaço reservado para a imagem oficial do campus. -->
+      <strong>Sua organização</strong>
+      <small>Gestão de ambientes</small>
+      <a href="index.html">Voltar ao acesso</a>
+    </div>
+  </aside>
+  <main class="conteudo">
+    <header class="cabecalho">
+      <div><h1>Nova chave</h1><p class="descricao">Estrutura do formulário de cadastro.</p></div>
+      
+    </header>
+    <p class="aviso">Protótipo estático · Dados fictícios para visualizar as telas. Nenhuma informação é salva.</p>
+    <section class="painel">
+      <form>
+        <label>Identificação<input type="text" name="identificacao" placeholder="Ex.: CH-05 · Sala 102" maxlength="120"></label>
+        <label>Descrição<input type="text" name="descricao" placeholder="Ex.: Chave da porta principal" maxlength="250"></label>
+        <div class="duas-colunas"><label>Finalidade<select name="finalidade"><option>Sala</option><option>Laboratório</option><option>Armário</option><option>Outro</option></select></label><label>Localização<input type="text" name="localizacao" placeholder="Ex.: Bloco A"></label></div>
+        <p class="descricao">Os campos podem ser preenchidos para avaliar a interface. O salvamento entra em uma etapa posterior.</p>
+        <div class="acoes"><button type="button" disabled>Salvar chave</button><a class="link" href="chaves.html">Voltar às chaves</a></div>
+      </form>
+    </section>
+    <footer>WellPro · Sistema de controle de chaves · Etapa 01</footer>
+  </main>
+</body>
+</html>
