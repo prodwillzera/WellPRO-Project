@@ -20,3 +20,13 @@ export function retirarChave(dados) {
   localStorage.setItem('wellpro.movimentacoes', JSON.stringify(movimentos));
   localStorage.setItem(CHAVE, JSON.stringify(chaves));
 }
+
+export function devolverChave(dados) {
+  const chaves = listarChaves(); const c = chaves.find(c => c.id === dados.chave);
+  const movimentos = listarMovimentacoes(); const m = movimentos.find(m => m.chave_id === dados.chave && !m.devolucao_em);
+  if (!c || c.status !== 'retirada' || !m) throw new Error('Não há retirada em aberto para esta chave.');
+  m.devolucao_em = new Date().toISOString(); m.observacao_devolucao = dados.observacao.trim();
+  c.status = 'disponivel'; c.responsavel = '';
+  localStorage.setItem('wellpro.movimentacoes', JSON.stringify(movimentos));
+  localStorage.setItem(CHAVE, JSON.stringify(chaves));
+}
