@@ -1,11 +1,25 @@
-import { listarChaves } from './modules/dados.js';
-import { celula, mensagem } from './modules/interface.js';
+import { api } from './modules/dados.js';
+import { celula, badge, linhaVazia, mensagem } from './modules/interface.js';
 try {
-  const chaves = await listarChaves();
-  const numeros = [chaves.length, ...['disponivel','retirada','perdida'].map(s => chaves.filter(c => c.status === s).length)];
-  document.querySelectorAll('.indicador strong').forEach((el,i) => el.textContent = numeros[i]);
-  const corpo = document.querySelector('tbody'); corpo.replaceChildren();
-  chaves.filter(c => c.status === 'retirada').forEach(c => {
-    const tr = document.createElement('tr'); [c.identificacao,c.localizacao,'Retirada',c.responsavel,'Consulte Devolução'].forEach((v,i) => celula(tr,['Chave','Localização','Situação','Responsável','Ação'][i],v)); corpo.append(tr);
-  });
-} catch(e) { mensagem(e.message); }
+  const dados = await api('/painel');
+  const numeros = [dados.total, dados.disponiveis, dados.retiradas, dados.perdidas];
+  document.querySelectorAll('.indicador strong').forEach((el, i) => (el.textContent = numeros[i]));
+  const corpo = document.querySelector('tbody');
+  corpo.replaceChildren();
+  for (const chave of dados.emUso) {
+    const linha = document.createElement('tr');
+    celula(linha, 'Chave', chave.identificacao);
+    celula(linha, 'Localização', chave.localizacao);
+    badge(linha, chave.status);
+    celula(linha, 'Responsável', chave.responsavel);
+    const link = document.createElement('a');
+    link.href = 'devolucao.html?chave=' + chave.id;
+    link.className = 'link';
+    link.textContent = 'Devolver';
+    celula(linha, 'Ação', '').append(link);
+    corpo.append(linha);
+  }
+  if (!dados.emUso.length) linhaVazia(corpo, 'Nenhuma chave em uso.');
+} catch (erro) {
+  mensagem(erro.message);
+}

@@ -1,50 +1,86 @@
 <!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Registrar retirada · WellPro</title>
-  <link rel="stylesheet" href="../assets/css/style.css">
-</head>
-<body>
-  <!-- Menu estático. Nesta etapa, edite o mesmo trecho nas demais páginas. -->
-  <aside class="menu">
-    <a class="marca" href="painel.html" aria-label="WellPro — Visão geral">WellPro<span>.</span></a>
-    <nav aria-label="Menu principal">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Registrar retirada · WellPro</title>
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
+  <body>
+    <aside class="menu">
+      <a class="marca" href="painel.html" aria-label="WellPro — Visão geral"
+        >WellPro<span>.</span></a
+      >
+      <nav aria-label="Menu principal">
         <a href="painel.html">Visão geral</a>
         <a href="chaves.html">Chaves</a>
         <a href="retirada.html" class="ativo" aria-current="page">Registrar retirada</a>
         <a href="devolucao.html">Registrar devolução</a>
         <a href="historico.html">Histórico</a>
         <a href="organizacao.html">Organização</a>
-        <a href="usuarios.html">Usuários</a>
-    </nav>
-    <div class="instituicao">
-      <!-- Espaço reservado para a imagem oficial do campus. -->
-      <strong>Sua organização</strong>
-      <small>Gestão de ambientes</small>
-      <a href="index.html">Voltar ao acesso</a>
-    </div>
-  </aside>
-  <main class="conteudo">
-    <header class="cabecalho">
-      <div><h1>Registrar retirada</h1><p class="descricao">Registre quem está retirando a chave.</p></div>
-      
-    </header>
-    <p class="aviso">Dados salvos no servidor · Acesso autenticado.</p>
-    <section class="painel">
-      <form>
-        <label>Chave disponível<select name="chave"><option>CH-01 · Sala 101</option><option>CH-04 · Sala de reuniões</option></select></label>
-        <label>Nome do responsável<input type="text" name="responsavel" required placeholder="Nome completo"></label>
-        <label>Matrícula ou identificação<input type="text" name="identificacao" placeholder="Identificação na organização"></label>
-        <label>Observação<textarea name="observacao" rows="3" placeholder="Informação adicional, se necessário"></textarea></label>
-        <p class="descricao">Data e hora são registradas automaticamente ao confirmar.</p>
-        <div class="acoes"><button type="submit">Confirmar retirada</button><a class="link" href="chaves.html">Voltar às chaves</a></div>
-      </form>
-    </section>
-    <footer>WellPro · Sistema de controle de chaves · Etapa 1.3.4</footer>
-  </main>
-  <script type="module" src="../assets/js/retirada.js"></script>
-  <script type="module" src="../assets/js/modules/autenticacao.js"></script>
-</body>
+        <a href="usuarios.html" data-admin hidden>Usuários</a>
+      </nav>
+      <div class="instituicao">
+        <img data-organizacao-imagem class="logo-organizacao" alt="Organização" hidden />
+        <strong data-organizacao-nome>Sua organização</strong>
+        <small data-organizacao-unidade>Gestão de ambientes</small>
+        <a id="sair" href="index.html">Sair</a>
+      </div>
+    </aside>
+    <main class="conteudo">
+      <header class="cabecalho">
+        <div>
+          <h1>Registrar retirada</h1>
+          <p class="descricao">Registre quem está retirando a chave.</p>
+        </div>
+      </header>
+      <p id="mensagem" class="aviso" role="status" aria-live="polite" hidden></p>
+      <section class="painel">
+        <form>
+          <label
+            >Chave disponível<select name="chave" required>
+              <option value="">Carregando chaves…</option>
+            </select></label
+          >
+          <label
+            >Nome do responsável<input
+              type="text"
+              name="responsavel"
+              required
+              maxlength="120"
+              list="pessoas"
+              placeholder="Nome completo"
+          /></label>
+          <datalist id="pessoas"></datalist>
+          <p class="descricao">
+            Selecione um nome já usado ou digite o nome de um novo responsável.
+          </p>
+          <label
+            >Matrícula ou identificação<input
+              type="text"
+              name="identificacao"
+              maxlength="120"
+              placeholder="Identificação na organização"
+          /></label>
+          <label
+            >Observação<textarea
+              name="observacao"
+              maxlength="1000"
+              rows="3"
+              placeholder="Informação adicional, se necessário"
+            ></textarea>
+          </label>
+          <p class="descricao">Data e hora são registradas automaticamente ao confirmar.</p>
+          <div class="acoes">
+            <button type="submit" disabled>Confirmar retirada</button
+            ><a class="link" href="chaves.html">Voltar às chaves</a>
+          </div>
+        </form>
+      </section>
+      <footer>WellPro · Sistema de controle de chaves</footer>
+    </main>
+    <script type="module" src="../assets/js/retirada.js"></script>
+    <script type="module" src="../assets/js/modules/autenticacao.js"></script>
+    <noscript>Ative o JavaScript do navegador para usar o WellPro.</noscript>
+  </body>
 </html>

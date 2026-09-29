@@ -1,55 +1,77 @@
 <!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Chaves · WellPro</title>
-  <link rel="stylesheet" href="../assets/css/style.css">
-</head>
-<body>
-  <!-- Menu estático. Nesta etapa, edite o mesmo trecho nas demais páginas. -->
-  <aside class="menu">
-    <a class="marca" href="painel.html" aria-label="WellPro — Visão geral">WellPro<span>.</span></a>
-    <nav aria-label="Menu principal">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chaves · WellPro</title>
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
+  <body>
+    <aside class="menu">
+      <a class="marca" href="painel.html" aria-label="WellPro — Visão geral"
+        >WellPro<span>.</span></a
+      >
+      <nav aria-label="Menu principal">
         <a href="painel.html">Visão geral</a>
         <a href="chaves.html" class="ativo" aria-current="page">Chaves</a>
         <a href="retirada.html">Registrar retirada</a>
         <a href="devolucao.html">Registrar devolução</a>
         <a href="historico.html">Histórico</a>
         <a href="organizacao.html">Organização</a>
-        <a href="usuarios.html">Usuários</a>
-    </nav>
-    <div class="instituicao">
-      <!-- Espaço reservado para a imagem oficial do campus. -->
-      <strong>Sua organização</strong>
-      <small>Gestão de ambientes</small>
-      <a href="index.html">Voltar ao acesso</a>
-    </div>
-  </aside>
-  <main class="conteudo">
-    <header class="cabecalho">
-      <div><h1>Chaves</h1><p class="descricao">Consulte as chaves cadastradas.</p></div>
-      <a class="botao" href="cadastro.html">+ Nova chave</a>
-    </header>
-    <p class="aviso">Dados salvos no servidor · Acesso autenticado.</p>
-    <section class="painel">
-      <div class="filtros"><label>Buscar chave<input type="search" placeholder="Nome ou localização"></label><label>Situação<select><option value="">Todas</option><option value="disponivel">Disponível</option><option value="retirada">Retirada</option><option value="perdida">Perdida</option></select></label></div>
-      <p class="descricao">Combine a busca com o filtro de situação.</p>
-    <div class="tabela">
-      <table>
-        <thead><tr><th>Chave / ambiente</th><th>Localização</th><th>Situação</th><th>Responsável</th><th>Ação</th></tr></thead>
-        <tbody>
-          <tr><td data-label="Chave"><strong>CH-01 · Sala 101</strong><small>Sala</small></td><td data-label="Localização">Bloco A</td><td data-label="Situação"><span class="status disponivel">Disponível</span></td><td data-label="Responsável">—</td><td><a class="link" href="retirada.html">Ver formulário de retirada</a></td></tr>
-          <tr><td data-label="Chave"><strong>CH-02 · Laboratório 01</strong><small>Laboratório</small></td><td data-label="Localização">Bloco B</td><td data-label="Situação"><span class="status retirada">Retirada</span></td><td data-label="Responsável">Marina Souza</td><td><a class="link" href="devolucao.html">Ver formulário de devolução</a></td></tr>
-          <tr><td data-label="Chave"><strong>CH-03 · Armário 02</strong><small>Armário</small></td><td data-label="Localização">Recepção</td><td data-label="Situação"><span class="status perdida">Perdida</span></td><td data-label="Responsável">—</td><td>—</td></tr>
-          <tr><td data-label="Chave"><strong>CH-04 · Sala de reuniões</strong><small>Sala</small></td><td data-label="Localização">Bloco A</td><td data-label="Situação"><span class="status disponivel">Disponível</span></td><td data-label="Responsável">—</td><td><a class="link" href="retirada.html">Ver formulário de retirada</a></td></tr>
-        </tbody>
-      </table>
-    </div>
-    </section>
-    <footer>WellPro · Sistema de controle de chaves · Etapa 1.3.3</footer>
-  </main>
-  <script type="module" src="../assets/js/chaves.js"></script>
-  <script type="module" src="../assets/js/modules/autenticacao.js"></script>
-</body>
+        <a href="usuarios.html" data-admin hidden>Usuários</a>
+      </nav>
+      <div class="instituicao">
+        <img data-organizacao-imagem class="logo-organizacao" alt="Organização" hidden />
+        <strong data-organizacao-nome>Sua organização</strong>
+        <small data-organizacao-unidade>Gestão de ambientes</small>
+        <a id="sair" href="index.html">Sair</a>
+      </div>
+    </aside>
+    <main class="conteudo">
+      <header class="cabecalho">
+        <div>
+          <h1>Chaves</h1>
+          <p class="descricao">Consulte as chaves cadastradas.</p>
+        </div>
+        <a class="botao" href="cadastro.html" data-admin hidden>+ Nova chave</a>
+      </header>
+      <p id="mensagem" class="aviso" role="status" aria-live="polite" hidden></p>
+      <section class="painel">
+        <div class="filtros">
+          <label>Buscar chave<input type="search" placeholder="Nome ou localização" /></label
+          ><label
+            >Situação<select>
+              <option value="">Todas</option>
+              <option value="disponivel">Disponível</option>
+              <option value="retirada">Retirada</option>
+              <option value="perdida">Perdida</option>
+            </select></label
+          >
+        </div>
+        <p class="descricao">Combine a busca com o filtro de situação.</p>
+        <div class="tabela">
+          <table>
+            <thead>
+              <tr>
+                <th>Chave / ambiente</th>
+                <th>Localização</th>
+                <th>Situação</th>
+                <th>Responsável</th>
+                <th>Ação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="5">Carregando registros…</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <footer>WellPro · Sistema de controle de chaves</footer>
+    </main>
+    <script type="module" src="../assets/js/chaves.js"></script>
+    <script type="module" src="../assets/js/modules/autenticacao.js"></script>
+    <noscript>Ative o JavaScript do navegador para usar o WellPro.</noscript>
+  </body>
 </html>

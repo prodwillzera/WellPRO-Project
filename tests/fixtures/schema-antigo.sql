@@ -1,8 +1,5 @@
 PRAGMA foreign_keys = ON;
-
-BEGIN TRANSACTION;
-
-CREATE TABLE IF NOT EXISTS usuarios (
+CREATE TABLE usuarios (
     id INTEGER PRIMARY KEY,
     nome TEXT NOT NULL CHECK (length(trim(nome)) > 0),
     login TEXT NOT NULL COLLATE NOCASE UNIQUE CHECK (length(trim(login)) > 0),
@@ -12,13 +9,11 @@ CREATE TABLE IF NOT EXISTS usuarios (
     ativo INTEGER NOT NULL DEFAULT 1 CHECK (ativo IN (0, 1)),
     criado_em TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
-
-CREATE TABLE IF NOT EXISTS chaves (
+CREATE TABLE chaves (
     id INTEGER PRIMARY KEY,
     identificacao TEXT NOT NULL COLLATE NOCASE UNIQUE
         CHECK (length(trim(identificacao)) > 0),
-    finalidade TEXT NOT NULL CHECK (finalidade IN ('sala', 'laboratorio', 'armario', 'outro')),
-    descricao TEXT,
+    finalidade TEXT NOT NULL CHECK (finalidade IN ('sala', 'laboratorio', 'armario')),
     localizacao TEXT,
     status TEXT NOT NULL DEFAULT 'disponivel'
         CHECK (status IN ('disponivel', 'retirada', 'perdida')),
@@ -26,12 +21,9 @@ CREATE TABLE IF NOT EXISTS chaves (
     observacoes TEXT,
     criado_em TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
-
-CREATE TABLE IF NOT EXISTS movimentacoes (
+CREATE TABLE movimentacoes (
     id INTEGER PRIMARY KEY,
     chave_id INTEGER NOT NULL,
-    identificacao_responsavel TEXT,
-    observacao_devolucao TEXT,
     responsavel_nome TEXT NOT NULL CHECK (length(trim(responsavel_nome)) > 0),
     usuario_retirada_id INTEGER NOT NULL,
     retirada_em TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -45,31 +37,10 @@ CREATE TABLE IF NOT EXISTS movimentacoes (
         OR (devolucao_em IS NOT NULL AND usuario_devolucao_id IS NOT NULL)),
     CHECK (devolucao_em IS NULL OR devolucao_em >= retirada_em)
 );
-
--- Uma chave nao pode ter duas retiradas abertas ao mesmo tempo.
-CREATE UNIQUE INDEX IF NOT EXISTS idx_movimentacao_aberta
+CREATE UNIQUE INDEX idx_movimentacao_aberta
     ON movimentacoes(chave_id) WHERE devolucao_em IS NULL;
-CREATE INDEX IF NOT EXISTS idx_movimentacoes_chave_data
+CREATE INDEX idx_movimentacoes_chave_data
     ON movimentacoes(chave_id, retirada_em);
-CREATE INDEX IF NOT EXISTS idx_movimentacoes_responsavel
+CREATE INDEX idx_movimentacoes_responsavel
     ON movimentacoes(responsavel_nome);
-CREATE INDEX IF NOT EXISTS idx_chaves_status ON chaves(status);
-
-CREATE TABLE IF NOT EXISTS configuracoes (chave TEXT PRIMARY KEY, valor TEXT NOT NULL);
-
-CREATE TABLE IF NOT EXISTS eventos (
-    id INTEGER PRIMARY KEY,
-    chave_id INTEGER NOT NULL REFERENCES chaves(id) ON DELETE RESTRICT,
-    movimentacao_id INTEGER REFERENCES movimentacoes(id) ON DELETE RESTRICT,
-    tipo TEXT NOT NULL CHECK (tipo IN ('retirada', 'devolucao', 'perda', 'encontrada')),
-    status TEXT NOT NULL CHECK (status IN ('disponivel', 'retirada', 'perdida')),
-    responsavel TEXT NOT NULL DEFAULT '',
-    usuario_id INTEGER REFERENCES usuarios(id) ON DELETE RESTRICT,
-    operador TEXT NOT NULL DEFAULT '',
-    ocorrido_em TEXT NOT NULL,
-    observacoes TEXT NOT NULL DEFAULT ''
-);
-CREATE INDEX IF NOT EXISTS idx_eventos_data ON eventos(ocorrido_em);
-CREATE INDEX IF NOT EXISTS idx_eventos_chave ON eventos(chave_id);
-
-COMMIT;
+CREATE INDEX idx_chaves_status ON chaves(status);

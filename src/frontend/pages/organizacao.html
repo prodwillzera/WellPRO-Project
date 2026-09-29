@@ -1,44 +1,69 @@
 <!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Organização · WellPro</title>
-  <link rel="stylesheet" href="../assets/css/style.css">
-</head>
-<body>
-  <!-- Menu estático. Nesta etapa, edite o mesmo trecho nas demais páginas. -->
-  <aside class="menu">
-    <a class="marca" href="painel.html" aria-label="WellPro — Visão geral">WellPro<span>.</span></a>
-    <nav aria-label="Menu principal">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Organização · WellPro</title>
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
+  <body>
+    <aside class="menu">
+      <a class="marca" href="painel.html" aria-label="WellPro — Visão geral"
+        >WellPro<span>.</span></a
+      >
+      <nav aria-label="Menu principal">
         <a href="painel.html">Visão geral</a>
         <a href="chaves.html">Chaves</a>
         <a href="retirada.html">Registrar retirada</a>
         <a href="devolucao.html">Registrar devolução</a>
         <a href="historico.html">Histórico</a>
         <a href="organizacao.html" class="ativo" aria-current="page">Organização</a>
-        <a href="usuarios.html">Usuários</a>
-    </nav>
-    <div class="instituicao">
-      <!-- Espaço reservado para a imagem oficial do campus. -->
-      <strong>Sua organização</strong>
-      <small>Gestão de ambientes</small>
-      <a href="index.html">Voltar ao acesso</a>
-    </div>
-  </aside>
-  <main class="conteudo">
-    <header class="cabecalho">
-      <div><h1>Organização</h1><p class="descricao">Espaço para a identificação da instituição.</p></div>
-      
-    </header>
-    <p class="aviso">Identidade da organização.</p>
-    <section class="painel">
-      <h2>Sua organização</h2><p class="descricao">A identidade institucional fica separada da marca WellPro.</p>
-      <!-- Quando tiver a imagem: <img src="../assets/img/campus.png" alt="IFC — Campus Fraiburgo" width="180"> -->
-      <div class="imagem-campus">Espaço reservado para a imagem do campus</div>
-    </section>
-    <footer>WellPro · Sistema de controle de chaves · Etapa 01</footer>
-  </main>
-  <script type="module" src="../assets/js/modules/autenticacao.js"></script>
-</body>
+        <a href="usuarios.html" data-admin hidden>Usuários</a>
+      </nav>
+      <div class="instituicao">
+        <img data-organizacao-imagem class="logo-organizacao" alt="Organização" hidden />
+        <strong data-organizacao-nome>Sua organização</strong>
+        <small data-organizacao-unidade>Gestão de ambientes</small>
+        <a id="sair" href="index.html">Sair</a>
+      </div>
+    </aside>
+    <main class="conteudo">
+      <header class="cabecalho">
+        <div>
+          <h1>Organização</h1>
+          <p class="descricao">Espaço para a identificação da instituição.</p>
+        </div>
+      </header>
+      <p id="mensagem" class="aviso" role="status" aria-live="polite" hidden></p>
+      <section class="painel">
+        <h2 id="nome-organizacao">Sua organização</h2>
+        <p id="unidade-organizacao"></p>
+        <p class="descricao">A identidade institucional fica separada da marca WellPro.</p>
+        <img id="imagem-organizacao" class="imagem-organizacao" alt="Organização" hidden />
+      </section>
+      <section class="painel" data-admin hidden>
+        <h2>Identificação da organização</h2>
+        <form id="form-organizacao">
+          <label>Nome<input name="nome" disabled required maxlength="120" /></label>
+          <label>Unidade ou campus<input name="unidade" disabled maxlength="120" /></label>
+          <label
+            >Caminho da imagem (opcional)<input
+              name="imagem"
+              disabled
+              placeholder="/assets/img/campus.png"
+              maxlength="200"
+          /></label>
+          <p class="descricao">
+            Para usar seu logotipo, coloque o arquivo em src/frontend/assets/img e informe o caminho
+            acima. Deixe vazio para mostrar apenas o nome.
+          </p>
+          <button type="submit" disabled>Salvar organização</button>
+        </form>
+      </section>
+      <footer>WellPro · Sistema de controle de chaves</footer>
+    </main>
+    <script type="module" src="../assets/js/modules/autenticacao.js"></script>
+    <script type="module" src="../assets/js/organizacao.js"></script>
+    <noscript>Ative o JavaScript do navegador para usar o WellPro.</noscript>
+  </body>
 </html>

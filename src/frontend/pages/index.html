@@ -1,30 +1,80 @@
 <!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Acesso · WellPro</title>
-  <link rel="stylesheet" href="../assets/css/style.css">
-</head>
-<body>
-  <main class="login">
-    <section class="apresentacao">
-      <a class="marca" href="painel.html">WellPro<span>.</span></a>
-      <h1>Controle de chaves</h1>
-      <p>Organize as retiradas e devoluções das chaves da sua organização.</p>
-    </section>
-    <section class="acesso"><div>
-      <h2>Acesse sua conta</h2>
-      <p class="descricao">Informe o login cadastrado pelo administrador.</p>
-      <form>
-        <label>Usuário ou matrícula<input type="text" name="usuario" required placeholder="Seu usuário" autocomplete="username"></label>
-        <label>Senha<input type="password" name="senha" required placeholder="Sua senha" autocomplete="current-password"></label>
-        <button type="submit">Entrar</button>
-      </form>
-      <p class="aviso">Use uma conta ativa cadastrada na etapa 1.3.9.</p>
-      <a class="link" href="painel.html">Ir para a visão geral (exige login) →</a>
-    </div></section>
-  </main>
-  <script type="module" src="../assets/js/login.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Acesso · WellPro</title>
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
+  <body>
+    <main class="login">
+      <section class="apresentacao">
+        <a class="marca" href="painel.html">WellPro<span>.</span></a>
+        <h1>Controle de chaves</h1>
+        <p>Organize as retiradas e devoluções das chaves da sua organização.</p>
+      </section>
+      <section class="acesso">
+        <div>
+          <h2 id="titulo-acesso">Acesse sua conta</h2>
+          <p id="orientacao" class="descricao">Informe seu login e senha.</p>
+          <p id="mensagem" class="aviso" role="status" aria-live="polite" hidden></p>
+          <form id="form-login">
+            <label
+              >Usuário ou matrícula<input
+                type="text"
+                name="usuario"
+                required
+                placeholder="Seu usuário"
+                autocomplete="username"
+            /></label>
+            <label
+              >Senha<input
+                type="password"
+                name="senha"
+                required
+                placeholder="Sua senha"
+                autocomplete="current-password"
+            /></label>
+            <button type="submit" disabled>Entrar</button>
+          </form>
+          <form id="form-inicial" hidden>
+            <label
+              >Nome do administrador<input name="nome" required maxlength="120" autocomplete="name"
+            /></label>
+            <label
+              >Login<input
+                name="login"
+                required
+                minlength="3"
+                maxlength="60"
+                pattern="[A-Za-z0-9_.\-]{3,60}"
+                autocomplete="username"
+            /></label>
+            <label
+              >Senha<input
+                name="senha"
+                type="password"
+                required
+                minlength="8"
+                maxlength="128"
+                autocomplete="new-password"
+            /></label>
+            <label
+              >Confirme a senha<input
+                name="confirmacao"
+                type="password"
+                required
+                minlength="8"
+                maxlength="128"
+                autocomplete="new-password"
+            /></label>
+            <button type="submit" disabled>Criar administrador</button>
+          </form>
+          <a class="link" href="painel.html">Ir para a visão geral (exige login) →</a>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="../assets/js/login.js"></script>
+    <noscript>Ative o JavaScript do navegador para usar o WellPro.</noscript>
+  </body>
 </html>

@@ -1,56 +1,79 @@
 <!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Visão geral · WellPro</title>
-  <link rel="stylesheet" href="../assets/css/style.css">
-</head>
-<body>
-  <!-- Menu estático. Nesta etapa, edite o mesmo trecho nas demais páginas. -->
-  <aside class="menu">
-    <a class="marca" href="painel.html" aria-label="WellPro — Visão geral">WellPro<span>.</span></a>
-    <nav aria-label="Menu principal">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Visão geral · WellPro</title>
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
+  <body>
+    <aside class="menu">
+      <a class="marca" href="painel.html" aria-label="WellPro — Visão geral"
+        >WellPro<span>.</span></a
+      >
+      <nav aria-label="Menu principal">
         <a href="painel.html" class="ativo" aria-current="page">Visão geral</a>
         <a href="chaves.html">Chaves</a>
         <a href="retirada.html">Registrar retirada</a>
         <a href="devolucao.html">Registrar devolução</a>
         <a href="historico.html">Histórico</a>
         <a href="organizacao.html">Organização</a>
-        <a href="usuarios.html">Usuários</a>
-    </nav>
-    <div class="instituicao">
-      <!-- Espaço reservado para a imagem oficial do campus. -->
-      <strong>Sua organização</strong>
-      <small>Gestão de ambientes</small>
-      <a href="index.html">Voltar ao acesso</a>
-    </div>
-  </aside>
-  <main class="conteudo">
-    <header class="cabecalho">
-      <div><h1>Visão geral</h1><p class="descricao">Acompanhe a organização das chaves.</p></div>
-      
-    </header>
-    <p class="aviso">Dados salvos no servidor · Acesso autenticado.</p>
-    <section class="resumo" aria-label="Resumo das chaves">
-      <div class="indicador">Chaves cadastradas<strong>4</strong></div>
-      <div class="indicador">Disponíveis<strong>2</strong></div>
-      <div class="indicador">Em uso<strong>1</strong></div>
-      <div class="indicador">Perdidas<strong>1</strong></div>
-    </section>
-    <section class="painel"><h2>Chaves em uso</h2>    <div class="tabela">
-      <table>
-        <thead><tr><th>Chave / ambiente</th><th>Localização</th><th>Situação</th><th>Responsável</th><th>Ação</th></tr></thead>
-        <tbody>
-          <tr><td data-label="Chave"><strong>CH-02 · Laboratório 01</strong><small>Laboratório</small></td><td data-label="Localização">Bloco B</td><td data-label="Situação"><span class="status retirada">Retirada</span></td><td data-label="Responsável">Marina Souza</td><td><a class="link" href="devolucao.html">Ver formulário de devolução</a></td></tr>
-        </tbody>
-      </table>
-    </div>
-    </section>
-    <section class="painel"><h2>Operações</h2><p>Escolha uma operação.</p><div class="acoes"><a class="botao" href="retirada.html">Retirada</a><a class="link" href="devolucao.html">Devolução</a></div></section>
-    <footer>WellPro · Sistema de controle de chaves · Etapa 1.3.6</footer>
-  </main>
-  <script type="module" src="../assets/js/painel.js"></script>
-  <script type="module" src="../assets/js/modules/autenticacao.js"></script>
-</body>
+        <a href="usuarios.html" data-admin hidden>Usuários</a>
+      </nav>
+      <div class="instituicao">
+        <img data-organizacao-imagem class="logo-organizacao" alt="Organização" hidden />
+        <strong data-organizacao-nome>Sua organização</strong>
+        <small data-organizacao-unidade>Gestão de ambientes</small>
+        <a id="sair" href="index.html">Sair</a>
+      </div>
+    </aside>
+    <main class="conteudo">
+      <header class="cabecalho">
+        <div>
+          <h1>Visão geral</h1>
+          <p class="descricao">Acompanhe a organização das chaves.</p>
+        </div>
+      </header>
+      <p id="mensagem" class="aviso" role="status" aria-live="polite" hidden></p>
+      <section class="resumo" aria-label="Resumo das chaves">
+        <div class="indicador">Chaves cadastradas<strong>—</strong></div>
+        <div class="indicador">Disponíveis<strong>—</strong></div>
+        <div class="indicador">Em uso<strong>—</strong></div>
+        <div class="indicador">Perdidas<strong>—</strong></div>
+      </section>
+      <section class="painel">
+        <h2>Chaves em uso</h2>
+        <div class="tabela">
+          <table>
+            <thead>
+              <tr>
+                <th>Chave / ambiente</th>
+                <th>Localização</th>
+                <th>Situação</th>
+                <th>Responsável</th>
+                <th>Ação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="5">Carregando registros…</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="painel">
+        <h2>Operações</h2>
+        <p>Escolha uma operação.</p>
+        <div class="acoes">
+          <a class="botao" href="retirada.html">Retirada</a
+          ><a class="link" href="devolucao.html">Devolução</a>
+        </div>
+      </section>
+      <footer>WellPro · Sistema de controle de chaves</footer>
+    </main>
+    <script type="module" src="../assets/js/painel.js"></script>
+    <script type="module" src="../assets/js/modules/autenticacao.js"></script>
+    <noscript>Ative o JavaScript do navegador para usar o WellPro.</noscript>
+  </body>
 </html>

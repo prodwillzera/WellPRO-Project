@@ -1,18 +1,90 @@
-import { listarChaves, listarMovimentacoes } from './modules/dados.js';
-import { celula, dataHora, mensagem } from './modules/interface.js';
-const [busca,inicio,fim] = document.querySelectorAll('.filtros input');
-async function renderizar() {
-  try {
-    const chaves = await listarChaves(); const movimentos = await listarMovimentacoes();
-    const corpo = document.querySelector('tbody'); corpo.replaceChildren();
-    if (inicio.value && fim.value && inicio.value > fim.value) { mensagem('Data inicial não pode ser posterior à final.'); return; }
-    for (const m of movimentos.slice().reverse()) {
-      const c = chaves.find(c => c.id === m.chave_id); const dia = new Date(m.retirada_em).toLocaleDateString('en-CA');
-      if (!`${c?.identificacao} ${m.responsavel}`.toLocaleLowerCase().includes(busca.value.toLocaleLowerCase()) || (inicio.value && dia < inicio.value) || (fim.value && dia > fim.value)) continue;
-      const tr = document.createElement('tr');
-      [c?.identificacao || 'Chave não encontrada',m.responsavel,dataHora(m.retirada_em),dataHora(m.devolucao_em),m.devolucao_em ? 'Devolvida' : c?.status === 'perdida' ? 'Perdida' : 'Retirada'].forEach((v,i) => celula(tr,['Chave','Responsável','Retirada','Devolução','Situação'][i],v)); corpo.append(tr);
-    }
-    if (!corpo.children.length) { const tr = document.createElement('tr'); celula(tr,'Resultado','Nenhuma movimentação encontrada.').colSpan=5; corpo.append(tr); }
-  } catch(e) { mensagem(e.message); }
+import { api } from './modules/dados.js';
+import { celula, badge, dataHora, mensagem, linhaVazia } from './modules/interface.js';
+const busca = document.querySelector('#busca');
+const inicio = document.querySelector('#inicio');
+const fim = document.querySelector('#fim');
+const operacao = document.querySelector('#operacao');
+const exportar = document.querySelector('#exportar');
+const nomes = {
+  retirada: 'Retirada',
+  devolucao: 'Devolução',
+  perda: 'Chave perdida',
+  encontrada: 'Chave encontrada'
+};
+let eventos = [];
+let filtrados = [];
+
+function renderizar() {
+  const corpo = document.querySelector('tbody');
+  corpo.replaceChildren();
+  mensagem('');
+  if (inicio.value && fim.value && inicio.value > fim.value) {
+    filtrados = [];
+    exportar.disabled = true;
+    mensagem('Data inicial não pode ser posterior à final.');
+    return;
+  }
+  filtrados = eventos.filter((evento) => {
+    const valor = evento.ocorrido_em.includes('T')
+      ? evento.ocorrido_em
+      : evento.ocorrido_em.replace(' ', 'T') + 'Z';
+    const data = new Date(valor);
+    const dia = `${data.getFullYear()}-${String(data.getMonth() + 1).padStart(2, '0')}-${String(data.getDate()).padStart(2, '0')}`;
+    return (
+      `${evento.chave} ${evento.responsavel} ${evento.operador}`
+        .toLocaleLowerCase()
+        .includes(busca.value.toLocaleLowerCase()) &&
+      (!inicio.value || dia >= inicio.value) &&
+      (!fim.value || dia <= fim.value) &&
+      (!operacao.value || evento.tipo === operacao.value)
+    );
+  });
+  for (const evento of filtrados) {
+    const linha = document.createElement('tr');
+    celula(linha, 'Chave', evento.chave);
+    celula(linha, 'Responsável', evento.responsavel || '—');
+    celula(linha, 'Operação', nomes[evento.tipo]);
+    celula(linha, 'Data / hora', dataHora(evento.ocorrido_em));
+    badge(linha, evento.status);
+    celula(linha, 'Registrado por', evento.operador || 'Registro anterior');
+    celula(linha, 'Observações', evento.observacoes || '—');
+    corpo.append(linha);
+  }
+  if (!filtrados.length) linhaVazia(corpo, 'Nenhum evento encontrado.', 7);
+  exportar.disabled = !filtrados.length;
 }
-[busca,inicio,fim].forEach(el => el.addEventListener('input',renderizar)); renderizar();
+
+function campoCSV(valor) {
+  let texto = String(valor ?? '');
+  if (/^[\s]*[=+@-]/.test(texto)) texto = "'" + texto;
+  return '"' + texto.replaceAll('"', '""') + '"';
+}
+exportar.onclick = () => {
+  const linhas = [
+    ['Chave', 'Responsável', 'Operação', 'Data/hora', 'Situação', 'Registrado por', 'Observações']
+  ];
+  for (const evento of filtrados)
+    linhas.push([
+      evento.chave,
+      evento.responsavel,
+      nomes[evento.tipo],
+      dataHora(evento.ocorrido_em),
+      evento.status,
+      evento.operador,
+      evento.observacoes
+    ]);
+  const csv = '\uFEFF' + linhas.map((linha) => linha.map(campoCSV).join(';')).join('\r\n');
+  const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'wellpro-historico.csv';
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+};
+[busca, inicio, fim, operacao].forEach((campo) => campo.addEventListener('input', renderizar));
+api('/historico')
+  .then((dados) => {
+    eventos = dados;
+    renderizar();
+  })
+  .catch((erro) => mensagem(erro.message));

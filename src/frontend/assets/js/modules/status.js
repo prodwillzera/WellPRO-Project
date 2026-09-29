@@ -1,1 +1,1 @@
-export const rotulos = {disponivel: 'Disponível', retirada: 'Retirada', perdida: 'Perdida'};
+export const rotulos = { disponivel: 'Disponível', retirada: 'Retirada', perdida: 'Perdida' };
