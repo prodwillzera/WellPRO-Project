@@ -1,5 +1,5 @@
 import { rotulos } from './modules/status.js';
-import { listarChaves } from './modules/dados.js';
+import { listarChaves, marcarPerdida } from './modules/dados.js';
 import { celula, mensagem } from './modules/interface.js';
 const busca = document.querySelector('input[type="search"]');
 const situacao = document.querySelector('.filtros select');
@@ -13,7 +13,10 @@ async function renderizar() {
       const tr = document.createElement('tr');
       celula(tr, 'Chave', `${c.identificacao} · ${c.finalidade}`);
       celula(tr, 'Localização', c.localizacao); celula(tr, 'Situação', rotulos[c.status]);
-      celula(tr, 'Responsável', c.responsavel || '—'); celula(tr, 'Ação', '—'); corpo.append(tr);
+      celula(tr, 'Responsável', c.responsavel || '—'); const acao = celula(tr, 'Ação', '');
+      if (c.status !== 'perdida') { const b = document.createElement('button'); b.type = 'button'; b.textContent = 'Marcar perdida';
+        b.onclick = async () => { if (!confirm('Registrar esta chave como perdida?')) return; try { await marcarPerdida(c.id); await renderizar(); } catch(e) { mensagem(e.message); } }; acao.append(b); }
+      corpo.append(tr);
     }
     if (!chaves.length) { const tr = document.createElement('tr'); celula(tr, 'Resultado', 'Nenhuma chave encontrada.').colSpan = 5; corpo.append(tr); }
   } catch (erro) { mensagem(erro.message); }

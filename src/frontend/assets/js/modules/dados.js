@@ -31,3 +31,10 @@ export function devolverChave(dados) {
   localStorage.setItem('wellpro.movimentacoes', JSON.stringify(movimentos));
   localStorage.setItem(CHAVE, JSON.stringify(chaves));
 }
+
+export function marcarPerdida(id) {
+  const chaves = listarChaves(); const c = chaves.find(c => c.id === id);
+  if (!c || c.status === 'perdida') throw new Error('Chave inexistente ou já perdida.');
+  alterarStatus(c, 'perdida', c.responsavel || '');
+  localStorage.setItem(CHAVE, JSON.stringify(chaves));
+}
