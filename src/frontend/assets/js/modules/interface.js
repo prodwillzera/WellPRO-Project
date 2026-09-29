@@ -6,3 +6,5 @@ export function mensagem(texto) {
 export function celula(linha, rotulo, valor) {
   const td = document.createElement('td'); td.dataset.label = rotulo; td.textContent = valor ?? '—'; linha.append(td); return td;
 }
+
+export function dataHora(iso) { return iso ? new Date(iso).toLocaleString('pt-BR') : '—'; }

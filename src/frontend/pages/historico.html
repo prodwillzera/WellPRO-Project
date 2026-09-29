@@ -27,12 +27,12 @@
   </aside>
   <main class="conteudo">
     <header class="cabecalho">
-      <div><h1>Histórico</h1><p class="descricao">Exemplos de como os registros serão apresentados.</p></div>
-      <button type="button" disabled>Exportar CSV</button>
+      <div><h1>Histórico</h1><p class="descricao">Consulte retiradas e devoluções registradas.</p></div>
+      <button type="button" disabled>Exportar CSV (futuro)</button>
     </header>
-    <p class="aviso">Protótipo estático · Dados fictícios para visualizar as telas. Nenhuma informação é salva.</p>
+    <p class="aviso">Etapa 1.3.8 · Dados de demonstração salvos neste navegador.</p>
     <section class="painel">
-      <div class="filtros"><label>Responsável<input type="search" placeholder="Buscar responsável" disabled></label><label>Data inicial<input type="date" disabled></label><label>Data final<input type="date" disabled></label></div>
+      <div class="filtros"><label>Responsável<input type="search" placeholder="Chave ou responsável"></label><label>Data inicial<input type="date"></label><label>Data final<input type="date"></label></div>
       <div class="tabela"><table>
         <thead><tr><th>Chave</th><th>Responsável</th><th>Retirada</th><th>Devolução</th><th>Situação</th></tr></thead>
         <tbody>
@@ -41,7 +41,8 @@
         </tbody>
       </table></div>
     </section>
-    <footer>WellPro · Sistema de controle de chaves · Etapa 01</footer>
+    <footer>WellPro · Sistema de controle de chaves · Etapa 1.3.8</footer>
   </main>
+  <script type="module" src="../assets/js/historico.js"></script>
 </body>
 </html>
