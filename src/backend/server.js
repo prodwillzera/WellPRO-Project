@@ -1,0 +1,14 @@
+import express from 'express';
+import { fileURLToPath } from 'node:url';
+import { lerEstado, gravarEstado } from './modules/repositorio.js';
+import { salvarUsuario, publico } from './modules/usuarios.js';
+const app=express();
+app.use(express.json({limit:'100kb'}));
+app.get('/api/usuarios',(req,res)=>res.json(lerEstado().usuarios.map(publico)));
+app.post('/api/usuarios',(req,res,next)=>{try{const e=lerEstado();const u=salvarUsuario(e,req.body);gravarEstado(e);res.status(201).json(u);}catch(e){next(e);}});
+app.put('/api/usuarios/:id',(req,res,next)=>{try{const e=lerEstado();const u=salvarUsuario(e,req.body,Number(req.params.id));gravarEstado(e);res.json(u);}catch(e){next(e);}});
+app.use('/api',(req,res)=>res.status(404).json({erro:'Rota inexistente.'}));
+app.use(express.static(fileURLToPath(new URL('../frontend/',import.meta.url))));
+app.get('/',(req,res)=>res.redirect('/pages/usuarios.html'));
+app.use((erro,req,res,next)=>res.status(400).json({erro:erro.message}));
+app.listen(Number(process.env.PORT||3000),'127.0.0.1',()=>console.log('WellPro em http://localhost:'+(process.env.PORT||3000)));
