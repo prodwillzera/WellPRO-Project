@@ -17,7 +17,8 @@ CREATE TABLE IF NOT EXISTS chaves (
     id INTEGER PRIMARY KEY,
     identificacao TEXT NOT NULL COLLATE NOCASE UNIQUE
         CHECK (length(trim(identificacao)) > 0),
-    finalidade TEXT NOT NULL CHECK (finalidade IN ('sala', 'laboratorio', 'armario')),
+    finalidade TEXT NOT NULL CHECK (finalidade IN ('sala', 'laboratorio', 'armario', 'outro')),
+    descricao TEXT,
     localizacao TEXT,
     status TEXT NOT NULL DEFAULT 'disponivel'
         CHECK (status IN ('disponivel', 'retirada', 'perdida')),
@@ -29,6 +30,8 @@ CREATE TABLE IF NOT EXISTS chaves (
 CREATE TABLE IF NOT EXISTS movimentacoes (
     id INTEGER PRIMARY KEY,
     chave_id INTEGER NOT NULL,
+    identificacao_responsavel TEXT,
+    observacao_devolucao TEXT,
     responsavel_nome TEXT NOT NULL CHECK (length(trim(responsavel_nome)) > 0),
     usuario_retirada_id INTEGER NOT NULL,
     retirada_em TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -51,5 +54,7 @@ CREATE INDEX IF NOT EXISTS idx_movimentacoes_chave_data
 CREATE INDEX IF NOT EXISTS idx_movimentacoes_responsavel
     ON movimentacoes(responsavel_nome);
 CREATE INDEX IF NOT EXISTS idx_chaves_status ON chaves(status);
+
+CREATE TABLE IF NOT EXISTS configuracoes (chave TEXT PRIMARY KEY, valor TEXT NOT NULL);
 
 COMMIT;

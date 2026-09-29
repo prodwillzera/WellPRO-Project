@@ -1,8 +1,15 @@
-import { randomBytes, scryptSync } from 'node:crypto';
+import { randomBytes, scryptSync, timingSafeEqual } from 'node:crypto';
 export function hashSenha(senha) {
   if (typeof senha !== 'string' || senha.length < 8 || senha.length > 128) throw new Error('Senha deve ter de 8 a 128 caracteres.');
   const sal = randomBytes(16).toString('hex');
   return `${sal}:${scryptSync(senha,sal,64).toString('hex')}`;
+}
+export function verificarSenha(senha, hash) {
+  if (typeof senha !== 'string' || senha.length > 128) return false;
+  const [sal,digest] = String(hash).split(':');
+  if (!sal || !digest) return false;
+  const valor = Buffer.from(digest,'hex');
+  return valor.length === 64 && timingSafeEqual(valor,scryptSync(senha,sal,64));
 }
 export function publico({senha_hash,...usuario}) { return usuario; }
 export function salvarUsuario(estado, dados, id) {

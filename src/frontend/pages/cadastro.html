@@ -31,18 +31,19 @@
       <div><h1>Nova chave</h1><p class="descricao">Cadastre a identificação e a finalidade da chave.</p></div>
       
     </header>
-    <p class="aviso">Etapa 1.3.3 · Dados de demonstração salvos neste navegador.</p>
+    <p class="aviso">Dados salvos no servidor · Acesso autenticado.</p>
     <section class="painel">
       <form>
         <label>Identificação<input type="text" name="identificacao" required placeholder="Ex.: CH-05 · Sala 102" maxlength="120"></label>
         <label>Descrição<input type="text" name="descricao" placeholder="Ex.: Chave da porta principal" maxlength="250"></label>
         <div class="duas-colunas"><label>Finalidade<select name="finalidade"><option>Sala</option><option>Laboratório</option><option>Armário</option><option>Outro</option></select></label><label>Localização<input type="text" name="localizacao" placeholder="Ex.: Bloco A"></label></div>
-        <p class="descricao">Identificação obrigatória e única. Os dados ficam neste navegador.</p>
+        <p class="descricao">Identificação obrigatória e única. Os dados ficam no servidor.</p>
         <div class="acoes"><button type="submit">Salvar chave</button><a class="link" href="chaves.html">Voltar às chaves</a></div>
       </form>
     </section>
     <footer>WellPro · Sistema de controle de chaves · Etapa 1.3.3</footer>
   </main>
   <script type="module" src="../assets/js/cadastro.js"></script>
+  <script type="module" src="../assets/js/modules/autenticacao.js"></script>
 </body>
 </html>

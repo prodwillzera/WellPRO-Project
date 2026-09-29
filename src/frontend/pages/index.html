@@ -15,15 +15,16 @@
     </section>
     <section class="acesso"><div>
       <h2>Acesse sua conta</h2>
-      <p class="descricao">Modelo visual da tela de acesso.</p>
+      <p class="descricao">Informe o login cadastrado pelo administrador.</p>
       <form>
-        <label>Usuário ou matrícula<input type="text" name="usuario" placeholder="Seu usuário" autocomplete="username"></label>
-        <label>Senha<input type="password" name="senha" placeholder="Sua senha" autocomplete="current-password"></label>
-        <button type="button" disabled>Entrar</button>
+        <label>Usuário ou matrícula<input type="text" name="usuario" required placeholder="Seu usuário" autocomplete="username"></label>
+        <label>Senha<input type="password" name="senha" required placeholder="Sua senha" autocomplete="current-password"></label>
+        <button type="submit">Entrar</button>
       </form>
-      <p class="aviso">Esta etapa não possui autenticação. Os campos são apenas ilustrativos.</p>
-      <a class="link" href="painel.html">Visualizar as telas do protótipo →</a>
+      <p class="aviso">Use uma conta ativa cadastrada na etapa 1.3.9.</p>
+      <a class="link" href="painel.html">Ir para a visão geral (exige login) →</a>
     </div></section>
   </main>
+  <script type="module" src="../assets/js/login.js"></script>
 </body>
 </html>

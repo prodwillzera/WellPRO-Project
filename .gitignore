@@ -9,3 +9,7 @@ data/*.json
 data/*.tmp
 .env.*
 database/*.db-*
+
+# SQLite e backups locais
+database/*.db
+database/*.bak

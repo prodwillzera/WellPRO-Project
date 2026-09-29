@@ -7,8 +7,8 @@ async function carregar() {
   form.querySelector('button').disabled = !chaves.length;
   const corpo = document.querySelector('tbody'); corpo.replaceChildren();
   chaves.forEach(c => { const tr = document.createElement('tr'); [c.identificacao,c.localizacao,c.status,c.responsavel,'Selecione abaixo'].forEach((v,i) => celula(tr,['Chave','Localização','Situação','Responsável','Ação'][i],v)); corpo.append(tr); });
-  document.querySelector('#responsavel').textContent = chaves.find(c => c.id === select.value)?.responsavel || '—';
-  select.onchange = () => { document.querySelector('#responsavel').textContent = chaves.find(c => c.id === select.value)?.responsavel || '—'; };
+  document.querySelector('#responsavel').textContent = chaves.find(c => String(c.id) === select.value)?.responsavel || '—';
+  select.onchange = () => { document.querySelector('#responsavel').textContent = chaves.find(c => String(c.id) === select.value)?.responsavel || '—'; };
   if (!chaves.length) mensagem('Nenhuma retirada em aberto.');
 }
 form.addEventListener('submit', async e => {
